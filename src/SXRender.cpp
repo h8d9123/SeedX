@@ -1,7 +1,7 @@
 #include "SXRender.h"
 sx_namespace_begin
 
-SDLRender::SDLRender(SDL_Window* win) : window(win)
+SDLRender::SDLRender(SDL_Window *win) : window(win)
 {
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
@@ -11,7 +11,7 @@ SDLRender::~SDLRender()
     SDL_DestroyRenderer(renderer);
 }
 
-int SDLRender::DrawPoint(const Point& p)
+int SDLRender::DrawPoint(const Point &p)
 {
     return SDL_RenderDrawPoint(renderer, p.x, p.y);
 }
@@ -23,7 +23,7 @@ int SDLRender::DrawLine(const LineSegment &seg)
 
 int SDLRender::DrawRect(const Rect &rect)
 {
-    return SDL_RenderDrawRect(renderer, reinterpret_cast<const SDL_Rect*>(&rect));
+    return SDL_RenderDrawRect(renderer, reinterpret_cast<const SDL_Rect *>(&rect));
 }
 
 int SDLRender::Clear()

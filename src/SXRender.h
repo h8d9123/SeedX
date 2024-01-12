@@ -5,7 +5,7 @@
 #include "SXShape.h"
 
 sx_namespace_begin
-#define RectXYWH(r) r.x, r.y, r.w, r,h
+
 class SXRender
 {
 public:
