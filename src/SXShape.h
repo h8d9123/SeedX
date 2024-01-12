@@ -1,8 +1,15 @@
+#ifndef SXShape_H
+#define SXShape_H
+
 #include "SXBasic.h"
 
 sx_namespace_begin
 
-using Point = SDL_Point;
+struct Point 
+{
+    Point(int x_, int y_):x(x_), y(y_) {};
+    int x, y;
+};
 
 struct LineSegment
 {
@@ -10,9 +17,8 @@ struct LineSegment
     Point p2;
 };
 
-class Rect
+struct Rect
 {
-public:
     Rect(int x, int y, int w, int h);
     bool IsEmpty();
     bool IsEqual(const Rect &other);
@@ -23,8 +29,17 @@ public:
     bool Intersect(const Rect &other, Rect& result);
     bool Intersect(const LineSegment &other, LineSegment &result);
     void Union(const Rect &other, Rect& result);
-protected:
-    SDL_Rect rect_;
+
+    Point GetLeftTop() { return Point{x, y}; }
+    Point GetRightDown() { return Point{x + w, y + h}; }
+    void SetLeftTop(Point &p) { x = p.x; y = p.y;}
+    void SetRightDown(Point &p) {  w = p.x - x; h = p.y - y;}
+    // operator SDL_Rect() const { return *reinterpret_cast<const SDL_Rect*>(this);}
+
+    int x,y;
+    int w,h;
 };
 
 sx_namespace_end
+
+#endif
