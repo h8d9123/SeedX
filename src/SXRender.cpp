@@ -1,9 +1,9 @@
 #include "SXRender.h"
 sx_namespace_begin
 
-SDLRender::SDLRender(SDL_Window *win) : window(win)
+SDLRender::SDLRender(SXWindow &win)
 {
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    renderer = SDL_CreateRenderer(static_cast<SDL_Window*>(win.Get()), -1, SDL_RENDERER_ACCELERATED);
 }
 
 SDLRender::~SDLRender()

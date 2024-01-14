@@ -23,7 +23,7 @@ public:
 class SDLRender : public SXRender
 {
 public:
-    SDLRender(SDL_Window *window);
+    SDLRender(SXWindow &window);
     virtual ~SDLRender();
     virtual int DrawPoint(const Point &p) override;
     virtual int DrawLine(const LineSegment &seg) override;
@@ -39,7 +39,6 @@ public:
 
 private:
     SDL_Renderer *renderer;
-    SDL_Window *window;
 };
 
 // todo: add other render?

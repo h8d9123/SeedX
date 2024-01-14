@@ -5,6 +5,6 @@
 #include "SXShape.h"
 #include "SXSurface.h"
 #include "SXTexture.h"
-#include "SXRender.h"
 #include "SXWindow.h"
+#include "SXRender.h"
 #endif

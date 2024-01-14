@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
     SDL_Init(SDL_INIT_EVERYTHING);
 
     SXWindow win("SeedX:Everything is possible!", 0,0,SCREEN_WIDTH,SCREEN_HEIGHT, 0);
-    SDLRender renderer(win.GetSDLWindow());
+    SDLRender renderer(win);
 
     SXSurface surface("hello.bmp");
     SXTexture texture(renderer, surface);

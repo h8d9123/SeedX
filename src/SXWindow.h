@@ -12,7 +12,7 @@ public:
     virtual ~SXWindow();
     
     // del?
-    SDL_Window * GetSDLWindow() {return window;}
+    void* Get() {return window;}
     DISABLE_COPY_AND_MOVE(SXWindow)
 private:
     SDL_Window *window;
