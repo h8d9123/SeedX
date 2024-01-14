@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
     Window win("SeedX:Everything is possible!", 0,0,SCREEN_WIDTH,SCREEN_HEIGHT, 0);
     SDLRender renderer(win.GetSDLWindow());
 
-    SDLSurface surface("hello.bmp");
+    SXSurface surface("hello.bmp");
     SXTexture texture(renderer, surface);
     renderer.Copy(texture, nullptr, nullptr);
     renderer.SetDrawColor(0xff, 0x00, 0x00, 0xff);

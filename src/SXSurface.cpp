@@ -2,14 +2,14 @@
 
 sx_namespace_begin
 
-SDLSurface::SDLSurface(const std::string & file)
+SXSurface::SXSurface(const std::string & file)
 {
     surface = SDL_LoadBMP(file.c_str());
     // todo:use sdl_image load file
     // IMG_Load(file.c_str(), 1);
 }
 
-SDLSurface::~SDLSurface()
+SXSurface::~SXSurface()
 {
     SDL_FreeSurface(surface);
 }

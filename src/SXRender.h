@@ -41,6 +41,8 @@ private:
     SDL_Renderer *renderer;
     SDL_Window *window;
 };
+
+// todo: add other render?
 sx_namespace_end
 
 #endif
