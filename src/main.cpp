@@ -19,7 +19,9 @@ int main(int argc, char* argv[])
     renderer.SetDrawColor(0xff, 0x00, 0x00, 0xff);
     Rect r(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
     renderer.DrawRect(r);
-    renderer.SetDrawColor(0xff, 0x00, 0xff, 0xff);
+    Rect r2(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, SCREEN_WIDTH / 8, SCREEN_HEIGHT / 8);
+    renderer.FillRect(r2);
+    renderer.SetDrawColor(0x00, 0x00, 0xff, 0xff);
     for (int i = 0; i < SCREEN_HEIGHT; i += 4)
     {
         renderer.DrawPoint(Point(SCREEN_WIDTH / 2, i));

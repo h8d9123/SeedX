@@ -26,6 +26,11 @@ int SDLRender::DrawRect(const Rect &rect)
     return SDL_RenderDrawRect(renderer, reinterpret_cast<const SDL_Rect *>(&rect));
 }
 
+int SDLRender::FillRect(const Rect &rect)
+{
+    return SDL_RenderFillRect(renderer, reinterpret_cast<const SDL_Rect *>(&rect));
+}
+
 int SDLRender::Clear()
 {
     return SDL_RenderClear(renderer);
