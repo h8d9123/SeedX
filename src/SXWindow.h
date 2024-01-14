@@ -5,15 +5,15 @@
 
 sx_namespace_begin
 
-class Window
+class SXWindow
 {
 public:
-    Window(const std::string & title, int x, int y, int w, int h, uint32_t flags);
-    virtual ~Window();
+    SXWindow(const std::string & title, int x, int y, int w, int h, uint32_t flags);
+    virtual ~SXWindow();
     
     // del?
     SDL_Window * GetSDLWindow() {return window;}
-    DISABLE_COPY_AND_MOVE(Window)
+    DISABLE_COPY_AND_MOVE(SXWindow)
 private:
     SDL_Window *window;
 };

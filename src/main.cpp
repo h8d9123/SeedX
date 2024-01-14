@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
     // start sdl
     SDL_Init(SDL_INIT_EVERYTHING);
 
-    Window win("SeedX:Everything is possible!", 0,0,SCREEN_WIDTH,SCREEN_HEIGHT, 0);
+    SXWindow win("SeedX:Everything is possible!", 0,0,SCREEN_WIDTH,SCREEN_HEIGHT, 0);
     SDLRender renderer(win.GetSDLWindow());
 
     SXSurface surface("hello.bmp");
