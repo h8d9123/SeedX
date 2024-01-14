@@ -2,6 +2,7 @@
 #include "SDL2/SDL.h"
 #include "SXShape.h"
 #include "SXRender.h"
+#include "SXWindow.h"
 #define SCREEN_HEIGHT 800
 #define SCREEN_WIDTH 600
 
@@ -11,10 +12,9 @@ int main(int argc, char* argv[])
 {
     // start sdl
     SDL_Init(SDL_INIT_EVERYTHING);
-    SDL_Window *win = NULL;
-    win = SDL_CreateWindow("SeedX:Everything is possible!", 0,0,SCREEN_WIDTH,SCREEN_HEIGHT, 0);
 
-    SDLRender renderer(win);
+    Window win("SeedX:Everything is possible!", 0,0,SCREEN_WIDTH,SCREEN_HEIGHT, 0);
+    SDLRender renderer(win.GetSDLWindow());
 
     renderer.SetDrawColor(0xff, 0x00, 0x00, 0xff);
     Rect r(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
@@ -39,7 +39,6 @@ int main(int argc, char* argv[])
     SDL_Delay(2000);
     // SDL_DestroyTexture(HelloTex);
 
-    SDL_DestroyWindow(win);
     // quit sdl
     SDL_Quit();
     return 0;

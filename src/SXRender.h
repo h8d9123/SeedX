@@ -6,7 +6,7 @@
 
 sx_namespace_begin
 
-    class SXRender
+class SXRender
 {
 public:
     virtual int DrawPoint(const Point &p) = 0;
