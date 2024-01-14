@@ -9,7 +9,8 @@ class Window
 {
 public:
     Window(const std::string & title, int x, int y, int w, int h, uint32_t flags);
-    ~Window();
+    virtual ~Window();
+    
     // del?
     SDL_Window * GetSDLWindow() {return window;}
     DISABLE_COPY_AND_MOVE(Window)
