@@ -5,7 +5,6 @@
 
 sx_namespace_begin
 
-
 class SXSurface
 {
 public:
