@@ -6,6 +6,34 @@
 
 using namespace sx;
 
+void drawBackGound(SDLRender& renderer)
+{
+    renderer.Clear();
+    renderer.SetDrawColor(0xff, 0xff, 0xff, 0xff);
+    Rect r{0, 0, SCREEN_WIDTH,SCREEN_HEIGHT};
+    renderer.FillRect(r);
+}
+
+void drawRectFllowMouse(SDLRender& renderer, int x, int y)
+{
+    renderer.SetDrawColor(0xff, 0x00, 0x00, 0xff);
+    Rect r(x, y, SCREEN_WIDTH / 8, SCREEN_HEIGHT / 8);
+    renderer.FillRect(r);
+}
+
+void drawBmp(SDLRender& renderer, SXTexture &texture)
+{
+    renderer.Copy(texture, nullptr, nullptr);
+}
+void drawLine(SDLRender& renderer)
+{
+    renderer.SetDrawColor(0x00, 0x00, 0xff, 0xff);
+    for (int i = 0; i < SCREEN_HEIGHT; i += 4)
+    {
+        renderer.DrawPoint(Point(SCREEN_WIDTH / 2, i));
+    }
+}
+
 int main(int argc, char* argv[])
 {
     // start sdl
@@ -16,23 +44,34 @@ int main(int argc, char* argv[])
 
     SXSurface surface("hello.bmp");
     SXTexture texture(renderer, surface);
-    renderer.Copy(texture, nullptr, nullptr);
-    renderer.SetDrawColor(0xff, 0x00, 0x00, 0xff);
-    Rect r(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-    renderer.DrawRect(r);
-    Rect r2(SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, SCREEN_WIDTH / 8, SCREEN_HEIGHT / 8);
-    renderer.FillRect(r2);
-    renderer.SetDrawColor(0x00, 0x00, 0xff, 0xff);
-    for (int i = 0; i < SCREEN_HEIGHT; i += 4)
-    {
-        renderer.DrawPoint(Point(SCREEN_WIDTH / 2, i));
-    }
-
     
-    renderer.Present();
+    bool quit = false;
+    SDL_Event e;
+    while (quit == false)
+    {
 
-    SDL_Delay(2000);
-
+        while (SDL_PollEvent(&e))
+        {
+            drawBackGound(renderer);
+            drawBmp(renderer, texture);
+            drawLine(renderer);
+            switch (e.type)
+            {
+            case SDL_QUIT:
+                quit = true;
+                break;
+            case SDL_MOUSEMOTION:
+                SDL_LogInfo(SDL_LOG_CATEGORY_TEST, "mouse_pos=(%d, %d)\n", e.motion.x, e.motion.y);
+                drawRectFllowMouse(renderer, e.motion.x, e.motion.y);
+                break;
+            default:
+                break;
+            }
+            renderer.Present();
+        }
+        
+    }
+    
 
     // quit sdl
     SDL_Quit();
