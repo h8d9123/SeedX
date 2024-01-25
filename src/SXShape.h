@@ -48,6 +48,11 @@ struct Rect
     int w, h;
 };
 
+struct Circle {
+    Circle(int x_, int y_, int r_) : x(x_), y(y_), r(r_) {};
+    int x,y;
+    int r;
+};
 sx_namespace_end
 
 #endif

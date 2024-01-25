@@ -34,6 +34,13 @@ void drawLine(SDLRender& renderer)
     }
 }
 
+void drawCircle(SDLRender& renderer)
+{
+    Circle c{SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 20};
+    renderer.SetDrawColor(0x00, 0x23, 0xff, 0xff);
+    renderer.DrawCircle(c);
+}
+
 int main(int argc, char* argv[])
 {
     // start sdl
@@ -55,6 +62,7 @@ int main(int argc, char* argv[])
             drawBackGound(renderer);
             drawBmp(renderer, texture);
             drawLine(renderer);
+            drawCircle(renderer);
             switch (e.type)
             {
             case SDL_QUIT:

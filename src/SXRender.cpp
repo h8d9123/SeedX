@@ -16,6 +16,11 @@ int SDLRender::DrawPoint(const Point &p)
     return SDL_RenderDrawPoint(renderer, p.x, p.y);
 }
 
+int SDLRender::DrawPoint(int x, int y)
+{
+    return SDL_RenderDrawPoint(renderer, x, y);
+}
+
 int SDLRender::DrawLine(const LineSegment &seg)
 {
     return SDL_RenderDrawLine(renderer, seg.p1.x, seg.p1.y, seg.p2.x, seg.p2.y);
@@ -55,5 +60,48 @@ int SDLRender::Copy(SXTexture &texture, const Rect *src, const Rect *dst)
     return SDL_RenderCopy(renderer, static_cast<SDL_Texture*>(texture.Get()), 
         reinterpret_cast<const SDL_Rect *>(src), 
         reinterpret_cast<const SDL_Rect *>(dst));
+}
+
+int SDLRender::DrawCircle(const Circle & circle)
+{
+    // https://en.wikipedia.org/w/index.php?title=Midpoint_circle_algorithm&oldid=889172082#C_example
+    int cx = circle.x;
+    int cy = circle.y;
+    int r = circle.r;
+
+    int x = r - 1;
+    int y = 0;
+    int dx = 1;
+    int dy = 1;
+    int err = dx - (circle.r << 1);
+    int ret = 0;
+    while (x >= y)
+    {
+        ret += DrawPoint(cx + x, cy + y);
+        ret += DrawPoint(cx + y, cy + x);
+        ret += DrawPoint(cx - y, cy + x);
+        ret += DrawPoint(cx - x, cy + y);
+        ret += DrawPoint(cx - x, cy - y);
+        ret += DrawPoint(cx - y, cy - x);
+        ret += DrawPoint(cx + y, cy - x);
+        ret += DrawPoint(cx + x, cy - y);
+        if (ret != 0)
+        {
+            return ret;
+        }
+        if (err <= 0)
+        {
+            y++;
+            err += dy;
+            dy += 2;
+        }
+        else
+        {
+            x--;
+            dx += 2;
+            err += dx - (r << 1);
+        }
+    }
+    return 0;
 }
 sx_namespace_end

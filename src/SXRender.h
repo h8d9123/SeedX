@@ -9,9 +9,11 @@ class SXRender
 {
 public:
     virtual int DrawPoint(const Point &p) = 0;
+    virtual int DrawPoint(int x, int y) = 0;
     virtual int DrawLine(const LineSegment &seg) = 0;
     virtual int DrawRect(const Rect &rect) = 0;
     virtual int FillRect(const Rect &rect) = 0;
+    virtual int DrawCircle(const Circle & circle) = 0;
     virtual int Clear() = 0;
     virtual void Present() = 0;
     virtual int SetDrawColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) = 0;
@@ -26,9 +28,11 @@ public:
     SDLRender(SXWindow &window);
     virtual ~SDLRender();
     virtual int DrawPoint(const Point &p) override;
+    virtual int DrawPoint(int x, int y) override;
     virtual int DrawLine(const LineSegment &seg) override;
     virtual int DrawRect(const Rect &rect) override;
     virtual int FillRect(const Rect &rect) override;
+    virtual int DrawCircle(const Circle & circle) override;
     virtual int Clear() override;
     virtual void Present() override;
     virtual int SetDrawColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) override;
