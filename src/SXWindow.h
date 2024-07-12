@@ -7,12 +7,13 @@ sx_namespace_begin
 /**
  * @brief SDL_video.h
 */
+class SDLRender;
 class SXWindow
 {
 public:
     SXWindow(const std::string & title, int x, int y, int w, int h, uint32_t flags);
     virtual ~SXWindow();
-    void* Get() {return window;}
+    void* Get() {return window_;}
     uint32_t GetWindowId();
     void SetWindowTitle(std::string & title);
     std::string GetWindowTitle();
@@ -33,12 +34,25 @@ public:
     void MinimizeWindow();
     void RestoreWindow();
     void SetFullscreen(uint32_t flags);
+    void HandleEvent( SDL_Event& e );
+    SDLRender * GetRender() { return render_;}
+    void Focus();
+    void RenderPresent();
+    bool isShown() {return isShown_;}
 
 public:
     DISABLE_COPY_AND_MOVE(SXWindow)
     
 private:
-    SDL_Window *window;
+    SDL_Window *window_;
+    SDLRender *render_;
+    int width_;
+    int height_;
+    bool hasMouseFocus_;
+    bool hasKeyBoardFocus_;
+    bool isFullScreen_;
+    bool isMinimized_;
+    bool isShown_;
 };
 
 sx_namespace_end

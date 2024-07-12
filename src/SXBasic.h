@@ -11,6 +11,10 @@
     class_name & operator=(const class_name &)=delete; \
     class_name & operator=(const class_name &&)=delete;
 
+extern "C" {
 #include "SDL2/SDL.h"
+#include "SDL2/SDL_ttf.h"
+}
+
 #endif
 

@@ -25,7 +25,7 @@ public:
 class SDLRender : public SXRender
 {
 public:
-    SDLRender(SXWindow &window);
+    SDLRender(SXWindow *window);
     virtual ~SDLRender();
     virtual int DrawPoint(const Point &p) override;
     virtual int DrawPoint(int x, int y) override;

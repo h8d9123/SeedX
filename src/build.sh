@@ -1,8 +1,8 @@
-g++ -I../output/sdl/include \
+g++ -g -I/usr/include \
     main.cpp \
     SXShape.cpp \
     SXTexture.cpp \
     SXSurface.cpp \
     SXRender.cpp \
     SXWindow.cpp \
-    -L../output/sdl/lib -lSDL2
+    `sdl2-config --cflags --libs` -lSDL2 -lSDL2_mixer -lSDL2_image -lSDL2_ttf

@@ -1,14 +1,25 @@
 #include "SXRender.h"
 sx_namespace_begin
 
-SDLRender::SDLRender(SXWindow &win)
+SDLRender::SDLRender(SXWindow *win):renderer(nullptr)
 {
-    renderer = SDL_CreateRenderer(static_cast<SDL_Window*>(win.Get()), -1, SDL_RENDERER_ACCELERATED);
+    if (win) {
+        renderer = SDL_CreateRenderer(static_cast<SDL_Window*>(win->Get()), -1, SDL_RENDERER_SOFTWARE);
+        if (renderer == nullptr) {
+            SDL_LogError(SDL_LOG_CATEGORY_ERROR, "renderer is null!");
+        }
+    } else {
+        SDL_LogError(SDL_LOG_CATEGORY_ERROR, "win is null!");
+    }
+    
 }
 
 SDLRender::~SDLRender()
 {
-    SDL_DestroyRenderer(renderer);
+    if (renderer) {
+        SDL_DestroyRenderer(renderer);
+        renderer = nullptr;
+    }
 }
 
 int SDLRender::DrawPoint(const Point &p)
@@ -102,6 +113,6 @@ int SDLRender::DrawCircle(const Circle & circle)
             err += dx - (r << 1);
         }
     }
-    return 0;
+    return ret;
 }
 sx_namespace_end

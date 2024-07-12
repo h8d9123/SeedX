@@ -2,6 +2,7 @@
 #define SXCOMMON_H
 
 #include "SXBasic.h"
+#include "SXLog.h"
 #include "SXShape.h"
 #include "SXSurface.h"
 #include "SXTexture.h"
