@@ -25,10 +25,6 @@ void drawRectFllowMouse(SDLRender& renderer, int x, int y)
     renderer.FillRect(r);
 }
 
-void drawBmp(SDLRender& renderer, SXTexture &texture)
-{
-    renderer.Copy(texture, nullptr, nullptr);
-}
 void drawLine(SDLRender& renderer)
 {
     renderer.SetDrawColor(0x00, 0x00, 0xff, 0xff);
@@ -55,12 +51,8 @@ int main(int argc, char* argv[])
     if (TTF_Init() < 0) {
         SXLogError("TTF_Init fail! %s\n", SDL_GetError());
     }
-    SDL_Color textColor={0, 0, 0, 0xff};
-    std::string inputText = "Some Text";
     
-    
-    TTF_Font* font= TTF_OpenFont( "./lazy.ttf", 14 );
-    SDL_Surface* textSurface = TTF_RenderText_Solid(font, inputText.c_str(), textColor);
+
     SXWindow win("SeedX:Everything is possible!", 0,0,SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     // SXWindow win1("SeedX:Everything is possible!", 10,0,SCREEN_WIDTH,SCREEN_HEIGHT, 0);
     std::vector<SXWindow*> winManger;
@@ -69,14 +61,13 @@ int main(int argc, char* argv[])
 
     SDLRender* renderer = win.GetRender();
 
-    SXSurface surface("hello.bmp");
+    SXBMPSurface surface("hello.bmp");
     SXTexture texture(*renderer, surface);
-
-    auto font_texture = SDL_CreateTextureFromSurface( (SDL_Renderer*) renderer->Get(), textSurface );
-    // SDL_FreeSurface(textSurface);
-    SDL_Rect font_rect = {0, 0, 100, 100};
     
-    // SDL_RenderCopy((SDL_Renderer*) renderer->Get(), font_texture, NULL, &font_rect);
+    SXText text("Hello"); 
+    SXTexture texture2(*renderer, text);
+    auto r = ((SDL_Surface*)text.Get())->clip_rect;
+    Rect font_rect2 = {200, 200, r.w, r.h};
     
     bool quit = false;
     SDL_Event e;
@@ -89,8 +80,9 @@ int main(int argc, char* argv[])
             // win1.HandleEvent(e);
             // win2.HandleEvent(e);
             drawBackGound(*renderer);
-            SDL_RenderCopy((SDL_Renderer*) renderer->Get(), font_texture, NULL, &font_rect);
-            // drawBmp(*renderer, font_rect);
+            renderer->Copy(texture, NULL, NULL);
+            renderer->Copy(texture2, NULL, &font_rect2);
+            // renderer->Copy(texture2, NULL, &font_rect2);
             // drawLine(renderer);
             // drawCircle(renderer);
             switch (e.type)

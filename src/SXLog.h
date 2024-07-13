@@ -17,5 +17,7 @@
 #define SXLogCtriical(fmt, args...) SDL_LogCritical(SDL_LOG_CATEGORY_CUSTOM, __fmt__(fmt), ##args)
 #define SXLog(fmt, args...) SDL_Log(SDL_LOG_CATEGORY_CUSTOM, fmt, ##args)
 
+#define SXGetError SDL_GetError
+
 
 #endif

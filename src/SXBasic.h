@@ -1,6 +1,8 @@
 
 #ifndef SXBASIC_H
 #define SXBASIC_H
+#include <iostream>
+#include <string>
 
 #define sx_namespace_begin namespace sx {
 #define sx_namespace_end }
