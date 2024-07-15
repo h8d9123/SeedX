@@ -3,6 +3,11 @@
 #define SXBASIC_H
 #include <iostream>
 #include <string>
+#include <memory>
+#include <vector>
+#include <map>
+#include <list>
+#include <algorithm>
 
 #define sx_namespace_begin namespace sx {
 #define sx_namespace_end }

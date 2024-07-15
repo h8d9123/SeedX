@@ -10,5 +10,5 @@
 #include "SXWindow.h"
 #include "SXRender.h"
 #include "SXBMPSurface.h"
-#include "SXText.h"
+#include "SXTextSurface.h"
 #endif

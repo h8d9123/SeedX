@@ -1,8 +1,8 @@
-#include "SXText.h"
+#include "SXTextSurface.h"
 #include "SXLog.h"
 
 sx_namespace_begin
-SXText::SXText(const std::string &text):text_(text)
+SXTextSurface::SXTextSurface(const std::string &text):text_(text)
 {
     SDL_Color textColor={0, 0, 0, 0xff};
     font_= TTF_OpenFont( "./SimSun.ttf", 25 );
@@ -16,7 +16,7 @@ SXText::SXText(const std::string &text):text_(text)
     TTF_CloseFont(font_);
 }
 
-SXText::~SXText()
+SXTextSurface::~SXTextSurface()
 {
     if (surface_) {
         SDL_FreeSurface(surface_);

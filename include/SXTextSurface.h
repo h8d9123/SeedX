@@ -3,18 +3,18 @@
 @author KiritoOvO
 @time 2024-07-13
 */
-#ifndef SXTEXT_H
-#define SXTEXT_H
+#ifndef SXTEXTSURFACE_H
+#define SXTEXTSURFACE_H
 
 #include "SXBasic.h"
 #include "SXSurface.h"
 
 sx_namespace_begin
 
-class SXText : public SXSurface {
+class SXTextSurface : public SXSurface {
 public:
-    SXText(const std::string &text);
-    virtual ~SXText();
+    SXTextSurface(const std::string &text);
+    virtual ~SXTextSurface();
 private:
     TTF_Font* font_;
     std::string text_;

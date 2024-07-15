@@ -3,6 +3,7 @@
 #include <algorithm>
 
 #include "SXCommon.h"
+#include "SXLabel.h"
 
 
 #define SCREEN_HEIGHT 800
@@ -52,7 +53,9 @@ int main(int argc, char* argv[])
         SXLogError("TTF_Init fail! %s\n", SDL_GetError());
     }
     
-
+    SXWidget top_window(nullptr);
+    SXLabel* label= new SXLabel(&top_window);
+    label->SetText("hello world");
     SXWindow win("SeedX:Everything is possible!", 0,0,SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     // SXWindow win1("SeedX:Everything is possible!", 10,0,SCREEN_WIDTH,SCREEN_HEIGHT, 0);
     std::vector<SXWindow*> winManger;
@@ -64,10 +67,13 @@ int main(int argc, char* argv[])
     SXBMPSurface surface("hello.bmp");
     SXTexture texture(*renderer, surface);
     
-    SXText text("Hello"); 
+    SXTextSurface text("Hello"); 
     SXTexture texture2(*renderer, text);
-    auto r = ((SDL_Surface*)text.Get())->clip_rect;
-    Rect font_rect2 = {200, 200, r.w, r.h};
+    
+    Rect text_pos;
+    text.GetClipRect(text_pos);
+    text_pos.x = 200;
+    text_pos.y = 200;
     
     bool quit = false;
     SDL_Event e;
@@ -81,8 +87,8 @@ int main(int argc, char* argv[])
             // win2.HandleEvent(e);
             drawBackGound(*renderer);
             renderer->Copy(texture, NULL, NULL);
-            renderer->Copy(texture2, NULL, &font_rect2);
-            // renderer->Copy(texture2, NULL, &font_rect2);
+            renderer->Copy(texture2, NULL, &text_pos);
+            // renderer->Copy(texture2, NULL, &text_pos);
             // drawLine(renderer);
             // drawCircle(renderer);
             switch (e.type)
@@ -98,6 +104,7 @@ int main(int argc, char* argv[])
             default:
                 break;
             }
+            top_window.Show();
             win.ShowWindow();
             win.Focus();
             win.RenderPresent();
