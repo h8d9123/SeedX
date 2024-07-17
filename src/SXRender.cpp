@@ -66,6 +66,17 @@ int SDLRender::GetDrawColor(uint8_t &r, uint8_t &g, uint8_t &b, uint8_t &a)
     return SDL_GetRenderDrawColor(renderer, &r, &g, &b, &a);
 }
 
+int SDLRender::SetDrawColor(const Color & color)
+{
+    return SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, color.a);
+}
+
+int SDLRender::GetDrawColor(Color & color)
+{
+    return SDL_GetRenderDrawColor(renderer, &color.r, &color.g, &color.b, &color.a);
+}
+
+
 int SDLRender::Copy(SXTexture &texture, const Rect *src, const Rect *dst)
 {
     return SDL_RenderCopy(renderer, static_cast<SDL_Texture*>(texture.Get()), 

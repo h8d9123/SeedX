@@ -22,14 +22,9 @@ SXWidget::~SXWidget()
 
 void SXWidget::Show()
 {  
-    auto renderer = GetRenderer(); 
+    auto renderer = GetRenderer();
+    renderer->SetDrawColor(Color(GMTRGB::WHITE));
     renderer->Clear();
-    uint8_t r,g,b,a;
-    renderer->GetDrawColor(r, g, b, a);
-    renderer->SetDrawColor(0xff, 0xff, 0xff, 0xff);
-    Rect rect{0, 0, 800,600};
-    renderer->FillRect(rect);
-    renderer->SetDrawColor(r, g, b, a);
     if (top_window_) {
         // todo set topwindow show
     }
@@ -63,14 +58,16 @@ bool SXWidget::addChild(SXWidget* child) {
     return true;
 }
 
-SXLabel::SXLabel(SXWidget* parent):SXWidget(parent)
+SXLabel::SXLabel(SXWidget* parent):SXWidget(parent),texture_(nullptr)
 {
-
+    w() = SXLABEL_DEFAULT_WIDTH;
+    h() = SXLABEL_DEFAULT_HEIGHT;
 }
 
 void SXLabel::SetText(const std::string &text)
 {
     text_ = text;
+    PreRender();
 }
 
 void SXLabel::PreRender()
@@ -86,10 +83,7 @@ void SXLabel::PreRender()
     }
     SXTextSurface text_surface(text_);
     texture_.reset(new SXTexture(*renderer, text_surface));
-    Rect border;
-    text_surface.GetClipRect(border);
-    w() = border.w;
-    h() = border.h;
+    text_surface.GetClipRect(text_rect_);
 }
 
 void SXLabel::Show()
@@ -98,11 +92,17 @@ void SXLabel::Show()
         SXLogError("parent_ is nullptr!\n");
         return;
     }
-    PreRender();
     Rect r{x(), y(), w(), h()};
     auto renderer = GetParent()->GetRenderer();
-
-    renderer->Copy(*texture_, NULL, &r);
+    Color old;
+    renderer->SetDrawColor(Color(GMTRGB::LIGHTGRAY));
+    renderer->FillRect(r);
+    
+    if (texture_) {
+        Rect text_dst_rect {x(), y(), text_rect_.w, text_rect_.h};
+        renderer->Copy(*texture_, NULL, &text_dst_rect);
+    }
+        
 }
 
 

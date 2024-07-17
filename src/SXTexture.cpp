@@ -15,7 +15,11 @@ SXTexture::SXTexture(SXRender &renderer, SXSurface &surface)
 
 SXTexture::~SXTexture()
 {
-    SDL_DestroyTexture(texture);
+    if (texture) {
+        SDL_DestroyTexture(texture);
+        texture = nullptr;
+    }
+        
 }
 
 sx_namespace_end

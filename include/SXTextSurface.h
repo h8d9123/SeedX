@@ -14,9 +14,9 @@ sx_namespace_begin
 class SXTextSurface : public SXSurface {
 public:
     SXTextSurface(const std::string &text);
+    SXTextSurface(const std::string &text, uint32_t font_size, const Color&  color);
     virtual ~SXTextSurface();
 private:
-    TTF_Font* font_;
     std::string text_;
 };
 sx_namespace_end

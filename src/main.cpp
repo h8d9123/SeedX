@@ -56,6 +56,12 @@ int main(int argc, char* argv[])
     SXWidget top_window(nullptr);
     SXLabel* label= new SXLabel(&top_window);
     label->SetText("hello world");
+
+    SXLabel* label2= new SXLabel(&top_window);
+    label2->x() = 0;
+    label2->y() = 25;
+    label2->SetText("second label");
+
     SXWindow win("SeedX:Everything is possible!", 0,0,SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
     // SXWindow win1("SeedX:Everything is possible!", 10,0,SCREEN_WIDTH,SCREEN_HEIGHT, 0);
     std::vector<SXWindow*> winManger;

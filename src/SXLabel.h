@@ -35,6 +35,9 @@ private:
     DISABLE_COPY_AND_MOVE(SXWidget)
 };
 
+#define SXLABEL_DEFAULT_WIDTH 150
+#define SXLABEL_DEFAULT_HEIGHT 20
+
 class SXLabel : public SXWidget {
 public:
     SXLabel(SXWidget* parent);
@@ -46,6 +49,7 @@ private:
 private:
     std::string text_;
     std::unique_ptr<SXTexture>texture_;
+    Rect text_rect_;
 };
 
 sx_namespace_end

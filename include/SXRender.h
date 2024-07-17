@@ -18,6 +18,8 @@ public:
     virtual void Present() = 0;
     virtual int SetDrawColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) = 0;
     virtual int GetDrawColor(uint8_t &r, uint8_t &g, uint8_t &b, uint8_t &a) = 0;
+    virtual int SetDrawColor(const Color & color) = 0;
+    virtual int GetDrawColor(Color & color) = 0;
     virtual void* Get() { return nullptr;}
     virtual int Copy(SXTexture& texture, const Rect *src, const Rect *dst)=0;
 };
@@ -37,6 +39,8 @@ public:
     virtual void Present() override;
     virtual int SetDrawColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) override;
     virtual int GetDrawColor(uint8_t &r, uint8_t &g, uint8_t &b, uint8_t &a) override;
+    virtual int SetDrawColor(const Color & color) override;
+    virtual int GetDrawColor(Color & color) override;
     void* Get() override {return renderer;}
     virtual int Copy(SXTexture& texture, const Rect *src, const Rect *dst) override;
     DISABLE_COPY_AND_MOVE(SDLRender)
