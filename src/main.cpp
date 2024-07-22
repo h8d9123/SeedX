@@ -83,6 +83,9 @@ int main(int argc, char* argv[])
     
     bool quit = false;
     SDL_Event e;
+    std::vector a{1,2,3};
+    std::vector b={1};
+    
     while (quit == false)
     {
 
